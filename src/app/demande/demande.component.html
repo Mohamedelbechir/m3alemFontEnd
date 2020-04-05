@@ -1,0 +1,70 @@
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#modalAffectCandidat">Open Modal</button>
+<div id="modalAffectCandidat" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title"
+  aria-hidden="true">
+  <div class="modal-dialog modal_add_election" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="my-modal-title">Demande d'adhésion</h5>        
+        <button class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p >
+          {{messageOperation}}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button id="closeModalPart" type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        <button (click)="onValidOperation()" class="btn btn-dark float-right">oui</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<div class="container mt-100 ">
+  <table *ngIf="dtOptions" id="listUtilisateurs" [dtOptions]='dtOptions' [dtTrigger]='dtTrigger'
+    class='row-border hover table table-striped' datatable>
+    <thead>
+      <tr>
+        <th class="text-center">Date Demande</th>
+        <th class="text-center">Cin</th>
+        <th class="text-center">Nom</th>
+        <th class="text-center">Prénom</th>
+        <th class="text-center">Data de Naissance</th>
+        <th class="text-center">Adresse</th>
+        <th class="text-center">Telephone</th>
+        <th class="text-center">Etat</th>
+        <th class="text-center" colspan="2">options</th>
+        <th></th>
+        <th> </th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let utilisateur of utilisateurs;" [id]="utilisateur.cin">
+
+        <td class="text-center">{{ utilisateur.dateDemande }}</td>
+        <td class="text-center">{{ utilisateur.cin }}</td>
+        <td class="text-center">{{ utilisateur.nom | titlecase}}</td>
+        <td class="text-center">{{ utilisateur.prenom }}</td>
+        <td class="text-center">{{ utilisateur.dateNaissance }}</td>
+        <td class="text-center">{{ utilisateur.adresse | titlecase  }}</td>
+        <td class="text-center">{{ utilisateur.tel }}</td>        
+        <td>
+          <span *ngIf="isAccepted(utilisateur.etatInscription)" class="badge badge-success">acceptée</span>
+          <span *ngIf="isRefused(utilisateur.etatInscription)" class="badge badge-danger">réfusée</span>
+          <span *ngIf="isAttented(utilisateur.etatInscription)" class="badge badge-info">en attente</span>
+        </td>
+
+        <td><span class="btn btn-success" title="accepter" (click)="onClickAccepter(utilisateur.cin)"><i
+          class="fa fa-check"></i></span></td>
+        <td><span class="btn btn-danger" title="refuser" (click)="onClickRefuser(utilisateur.cin)"><i class="fa fa-undo"></i></span></td>
+        <td><a href="" class="btn btn-primary" title="Détail"><i class="fa fa-search-plus"></i></a></td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
