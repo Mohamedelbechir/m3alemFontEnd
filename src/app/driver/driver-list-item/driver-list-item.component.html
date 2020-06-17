@@ -1,0 +1,16 @@
+<td class="text-center">{{ driver.cin}}</td>
+<td class="text-center">{{ driver.nom | titlecase}}</td>
+<td class="text-center">{{ driver.prenom | titlecase}}</td>
+<td class="text-center">{{ driver.tel }}</td>
+<td class="text-center">{{ dateDemande() }}</td>
+<td class="text-center">{{ age() }} ans </td>
+
+<td class="text-center "><a (click)="onRequestHist.emit(driver.cin)" class="text-primary pointer"><u>historiques des
+            courses</u></a></td>
+<td class="text-center">
+    <span *ngIf="!isBlocked()" class="btn btn-danger" title="bloquer ce chauffeur" (click)="onBlockRequest()"><i
+            class="fa fa-ban"></i></span>
+    <span *ngIf="isBlocked()" class="btn btn-success" title="activer ce chauffeur" (click)="onActivateRequest()"><i
+            class="fa fa-check"></i></span>
+</td>
+<!-- <td><a href="" class="btn btn-primary" title="Détail"><i class="fa fa-search-plus"></i></a></td> -->

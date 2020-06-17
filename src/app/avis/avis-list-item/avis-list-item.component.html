@@ -1,0 +1,11 @@
+<td class="text-center">{{ avis.fullNameDriver | titlecase}}</td>
+<td class="text-center">{{ avis.fullNamePassager | titlecase}}</td>
+<td class="text-center">{{ humanReadable }}</td>
+<td class="text-center">{{ avis.message}}</td>
+<td class="text-center">
+    <span *ngFor="let item of nbCheck" class="fa fa-star checked"></span>
+    <span *ngFor="let item of nbNoCheck" class="fa fa-star"></span>
+</td>
+<td class="text-center"><span class="btn btn-danger" title="modifier" (click)="onDeleteRequest.emit(avis.id)"><i
+            class="fa fa-trash"></i></span></td>
+<!-- <td><a href="" class="btn btn-primary" title="Détail"><i class="fa fa-search-plus"></i></a></td> -->

@@ -18,7 +18,9 @@ import {
 } from '../services/utilisateur.service';
 import * as $ from 'jquery';
 import 'datatables.net';
-import { EtatInstription } from '../utils/etatInsciption';
+import { TypeUtilisateur } from 'src/Utils/typeUtilisateur';
+import { EtatInstription } from 'src/Utils/etatInsciption';
+import { dataTableConfig } from 'src/Utils/dataTableConfig';
 
 
 
@@ -46,40 +48,7 @@ export class DemandeComponent implements OnInit {
   }
 
   initDataTable(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      dom: 'Bfrtip',
-      // buttons: [
-      //   'print',
-      //   'csv'
-      // ],
-      responsive: true,
-      /* below is the relevant part, e.g. translated to spanish */
-      language: {
-
-        processing: "chargement...",
-        search: "Rechercher:",
-        lengthMenu: "Mostrar _MENU_ &eacute;l&eacute;ments",
-        info: "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
-        infoEmpty: "Information vide.",
-        infoFiltered: "(filtré à partir de _MAX_ éléments au total)",
-        infoPostFix: "",
-        loadingRecords: "Chargement...",
-        zeroRecords: "Aucune donnée à afficher",
-        emptyTable: "Liste vide",
-        paginate: {
-          first: "Premier",
-          previous: "Dernier",
-          next: "Suivant",
-          last: "Précédent"
-        },
-        aria: {
-          sortAscending: ":  activer pour trier la colonne par ordre croissant",
-          sortDescending: ": activer pour trier la colonne par ordre décroissant"
-        }
-      }
-    };
+    this.dtOptions = dataTableConfig
   }
 
 
@@ -87,7 +56,10 @@ export class DemandeComponent implements OnInit {
 
     this.initDataTable();
     this.utilisateurService.getUtilisateur().subscribe((data: Utilisateur[]) => {
-      this.utilisateurs = data.filter((item, index, items) => item.typeUtilisateur == 'chauffeur');
+      this.utilisateurs = data.filter(
+        (item, index, items) => (item.typeUtilisateur == TypeUtilisateur.chauffeur
+          && item.etatInscription === EtatInstription.EN_ATTENTE_INSCRIPTION)
+      );
 
       //this.tableDataIsLoaded = true;
       this.dtTrigger.next();
@@ -174,7 +146,7 @@ export class DemandeComponent implements OnInit {
     document.getElementById("openModalButton").click();
   }
   onValidOperation() {
-    this.selectedUser.etatInscription = this.onAccept ?  EtatInstription.ACCEPTER_INSCRIPTION : EtatInstription.REFUSER_INSCRIPTION;
+    this.selectedUser.etatInscription = this.onAccept ? EtatInstription.ACCEPTER_INSCRIPTION : EtatInstription.REFUSER_INSCRIPTION;
     this.utilisateurService.update(this.selectedUser).subscribe((data: Utilisateur) => {
       console.log(data);
 
@@ -187,13 +159,13 @@ export class DemandeComponent implements OnInit {
 
     });
   }
-  isAccepted(etat: String){
-   return EtatInstription.ACCEPTER_INSCRIPTION === etat;
+  isAccepted(etat: String) {
+    return EtatInstription.ACCEPTER_INSCRIPTION === etat;
   }
-  isRefused(etat: String){
-   return EtatInstription.REFUSER_INSCRIPTION === etat;
+  isRefused(etat: String) {
+    return EtatInstription.REFUSER_INSCRIPTION === etat;
   }
-  isAttented(etat: String){
-   return EtatInstription.EN_ATTENTE_INSCRIPTION === etat;
+  isAttented(etat: String) {
+    return EtatInstription.EN_ATTENTE_INSCRIPTION === etat;
   }
 }

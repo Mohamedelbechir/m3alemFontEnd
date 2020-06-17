@@ -1,0 +1,44 @@
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#modalAffectCandidat">Open Modal</button>
+<div id="modalAffectCandidat" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title"
+    aria-hidden="true">
+    <div class="modal-dialog modal_add_election" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="my-modal-title">Nodifier</h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <input type="number" class="form-control" [formControl]="nouveauPrix">
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button id="closeModalPart" type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button [disabled]="nouveauPrix.invalid" (click)="onSave()"
+                    class="btn btn-dark float-right">oui</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="container mt-100 ">
+    <div class="mt-100 d-flex justify-content-center">
+
+        <div class="col-lg-4 ">
+            <div *ngIf="prix" class="card ">
+                <div class="card-body">
+                    <span class="font-weight-bold">Tarif</span><br>
+                    <h1 class="d-inline-block font-weight-bold">{{ prix.prixKm }}</h1> DT/Km
+                </div>
+                <div class="card-footer text-center">
+                    <button (click)="onUpdateRequest()" type="button" class="btn btn-link ">nodifier le tarif <i
+                            class="fa fa-angle-right ml-1"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

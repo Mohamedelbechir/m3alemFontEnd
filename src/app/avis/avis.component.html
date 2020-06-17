@@ -1,0 +1,47 @@
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#modalAffectCandidat">Open Modal</button>
+<div id="modalAffectCandidat" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title"
+  aria-hidden="true">
+  <div class="modal-dialog modal_add_election" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="my-modal-title">Suppimer</h5>
+        <button class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Etes-vous sûr de vouloir supprimer cet avis ?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button id="closeModalPart" type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        <button (click)="onDeleteConfirme()" class="btn btn-dark float-right">oui</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="container mt-100 ">
+  <table datatable [dtOptions]='dtOptionsAvis' [dtTrigger]="dtTriggerAvis"
+    class='row-border hover table table-striped'>
+    <thead>
+      <tr>
+        <th class="text-center">Chauffeur</th>
+        <th class="text-center">Passager</th>
+        <th class="text-center">Date</th>
+        <th class="text-center">commentaire</th>
+        <th class="text-center">Nombre d'étoile</th>
+        <th class="text-center" >options</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr app-avis-list-item *ngFor="let currentAvis of avies;" [id]="currentAvis.id" [avis]="currentAvis"
+        (onDeleteRequest)="onDeleteRequest($event)">
+
+      </tr>
+    </tbody>
+  </table>
+</div>

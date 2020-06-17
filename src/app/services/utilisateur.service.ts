@@ -66,9 +66,8 @@ export class UtilisateurService {
 
   }
   update(utilsateur: Utilisateur): Observable<Utilisateur> {
-    let headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8',"Access-Control-Allow-Origin":"*"}); 
 
-    return this.http.put<Utilisateur>(this.entityUrl + '/' + utilsateur.cin, utilsateur,{headers:headers});     
+    return this.http.put<Utilisateur>(this.entityUrl + '/' + utilsateur.cin, utilsateur);     
   }
   getUtilisateur(){
     return this.http.get<Utilisateur[]>(this.entityUrl);

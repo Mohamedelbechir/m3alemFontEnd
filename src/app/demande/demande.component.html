@@ -35,10 +35,7 @@
         <th class="text-center">Adresse</th>
         <th class="text-center">Telephone</th>
         <th class="text-center">Etat</th>
-        <th class="text-center" colspan="2">options</th>
-        <th></th>
-        <th> </th>
-
+        <th class="text-center" >options</th>
 
       </tr>
     </thead>
@@ -59,10 +56,12 @@
           <span *ngIf="isAttented(utilisateur.etatInscription)" class="badge badge-info">en attente</span>
         </td>
 
-        <td><span class="btn btn-success" title="accepter" (click)="onClickAccepter(utilisateur.cin)"><i
-          class="fa fa-check"></i></span></td>
-        <td><span class="btn btn-danger" title="refuser" (click)="onClickRefuser(utilisateur.cin)"><i class="fa fa-undo"></i></span></td>
-        <td><a href="" class="btn btn-primary" title="Détail"><i class="fa fa-search-plus"></i></a></td>
+        <td>
+          <span [ngStyle]="{'margin-right.px': 4}" class="btn btn-success " title="accepter" (click)="onClickAccepter(utilisateur.cin)"><i
+          class="fa fa-check"></i></span>
+          <span class="btn btn-danger" title="refuser" (click)="onClickRefuser(utilisateur.cin)"><i class="fa fa-undo"></i></span>
+        </td>
+       
 
       </tr>
     </tbody>

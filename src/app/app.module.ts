@@ -15,7 +15,15 @@ import { GaleryComponent } from './galery/galery.component';
 import { IntroComponent } from './intro/intro.component';
 import { DataTablesModule } from 'angular-datatables';
 import { AuthAdminGuard } from './guard/auth-admin.guard';
-
+import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
+import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
+import { AvisComponent } from './avis/avis.component';
+import { ModalComponent } from './modal/modal/modal.component';
+import { AvisListItemComponent } from './avis/avis-list-item/avis-list-item.component';
+import { PrixComponent } from './prix/prix.component';
+import { DriverComponent } from './driver/driver.component';
+import { DriverListItemComponent } from './driver/driver-list-item/driver-list-item.component';
+import { HistoriqueCourseComponent } from './historique-course/historique-course.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +36,15 @@ import { AuthAdminGuard } from './guard/auth-admin.guard';
     AboutComponent,
     GaleryComponent,
     IntroComponent,
+    HomeLayoutComponent,
+    LoginLayoutComponent,
+    AvisComponent,
+    ModalComponent,
+    AvisListItemComponent,
+    PrixComponent,
+    DriverComponent,
+    DriverListItemComponent,
+    HistoriqueCourseComponent,
     
   ],
   imports: [
