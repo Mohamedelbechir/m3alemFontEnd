@@ -43,7 +43,7 @@
 
       <tr *ngFor="let utilisateur of utilisateurs;" [id]="utilisateur.cin">
 
-        <td class="text-center">{{ utilisateur.dateDemande }}</td>
+        <td class="text-center">{{ depuis(utilisateur.dateDemande) }}</td>
         <td class="text-center">{{ utilisateur.cin }}</td>
         <td class="text-center">{{ utilisateur.nom | titlecase}}</td>
         <td class="text-center">{{ utilisateur.prenom }}</td>

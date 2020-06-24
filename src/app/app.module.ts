@@ -24,6 +24,8 @@ import { PrixComponent } from './prix/prix.component';
 import { DriverComponent } from './driver/driver.component';
 import { DriverListItemComponent } from './driver/driver-list-item/driver-list-item.component';
 import { HistoriqueCourseComponent } from './historique-course/historique-course.component';
+import { PassagerComponent } from './passager/passager.component';
+import { PassagerListItemComponent } from './passager/passager-list-item/passager-list-item.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { HistoriqueCourseComponent } from './historique-course/historique-course
     DriverComponent,
     DriverListItemComponent,
     HistoriqueCourseComponent,
+    PassagerComponent,
+    PassagerListItemComponent,
     
   ],
   imports: [

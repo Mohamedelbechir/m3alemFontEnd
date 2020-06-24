@@ -1,10 +1,6 @@
-export interface Driver {
-    cin: string;
-    nom: string;
-    prenom: string;
-    dateNaissance: string;
-    dateDemande: string;
-    tel: string;
+import { Passager } from './Passager';
+
+export interface Driver extends Passager {
     etatCompte: string;
     etatInscription: string;
 }

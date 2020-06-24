@@ -1,31 +1,18 @@
-import {
-  Component,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import {
-  Utilisateur
-} from '../models/utilisateur';
-import {
-  Subject
-} from 'rxjs';
-import {
-  DataTableDirective
-} from 'angular-datatables';
-import {
-  UtilisateurService
-} from '../services/utilisateur.service';
-import * as $ from 'jquery';
+import { Utilisateur } from '../models/utilisateur';
+import { Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
+import { UtilisateurService } from '../services/utilisateur.service';
+import * as moment from 'moment';
+
 import 'datatables.net';
 import { TypeUtilisateur } from 'src/Utils/typeUtilisateur';
 import { EtatInstription } from 'src/Utils/etatInsciption';
 import { dataTableConfig } from 'src/Utils/dataTableConfig';
-
-
-
-
-
+import 'bootstrap-notify';
+import * as jQuery from 'jquery';
+let $: any = jQuery;
 
 
 @Component({
@@ -58,7 +45,7 @@ export class DemandeComponent implements OnInit {
     this.utilisateurService.getUtilisateur().subscribe((data: Utilisateur[]) => {
       this.utilisateurs = data.filter(
         (item, index, items) => (item.typeUtilisateur == TypeUtilisateur.chauffeur
-          && item.etatInscription === EtatInstription.EN_ATTENTE_INSCRIPTION)
+         /* && item.etatInscription === EtatInstription.EN_ATTENTE_INSCRIPTION*/)
       );
 
       //this.tableDataIsLoaded = true;
@@ -68,26 +55,6 @@ export class DemandeComponent implements OnInit {
       (error) => console.log(error)
     );
   }
-
-  // onSubmit(electeur: Utilisateur) {
-
-
-  // candidat.date_naissance = moment(candidat.date_naissance).format('yyyy-MM-dd');
-  // console.log(electeur.date_naissance);
-
-  //this.utilisateurService.add(electeur).subscribe((data: Utilisateur) => {
-
-  //  this.electeurs.push(data);
-  //this.showNotify();
-  //this.formElecteur.reset();
-  //this.rerender();
-
-  //},
-  //(error) => console.log(error)
-
-  //);
-
-  //}
   rerender(): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first
@@ -96,38 +63,7 @@ export class DemandeComponent implements OnInit {
       this.dtTrigger.next();
     });
   }
-  // showNotify() {
-  // const Toast = Swal.mixin({
-  // toast: true,
-  //position: 'top-end',
-  //showConfirmButton: false,
-  //timer: 3000,
-  //timerProgressBar: true,
-  //onOpen: (toast) => {
-  //toast.addEventListener('mouseenter', Swal.stopTimer)
-  //toast.addEventListener('mouseleave', Swal.resumeTimer)
-  //}
-  //});
 
-  //Toast.fire({
-  //icon: 'success',
-  //title: 'Candidat ajouté avec success!'
-  //});
-  //}
-  //onFileChange(event) {
-  //let reader = new FileReader();
-
-  //if (event.target.files && event.target.files.length) {
-  //const [file] = event.target.files;
-  //reader.readAsDataURL(file);
-
-  //reader.onload = () => {
-  //this.formElecteur.patchValue({
-  //file: reader.result
-  //});
-  //};
-  //}
-  //}
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
@@ -151,10 +87,16 @@ export class DemandeComponent implements OnInit {
       console.log(data);
 
       if (data != null) {
-        let updateItem = this.utilisateurs.find(item => item.cin = data.cin);
-        let index = this.utilisateurs.indexOf(updateItem);
-        this.utilisateurs[index] = data;
-        this.rerender();
+        this.utilisateurs = this.utilisateurs.map<Utilisateur>(item => item.cin === data.cin ? data : item);
+       // this.rerender();
+        document.getElementById("closeModalPart").click();
+
+        $.notify({
+          title: '<strong>Succès!</strong>',
+          message: 'Operation effectée avec succès !'
+        }, {
+          type: 'success'
+        });
       }
 
     });
@@ -168,4 +110,5 @@ export class DemandeComponent implements OnInit {
   isAttented(etat: String) {
     return EtatInstription.EN_ATTENTE_INSCRIPTION === etat;
   }
+  depuis = (value) => moment(value).lang('fr').fromNow();
 }

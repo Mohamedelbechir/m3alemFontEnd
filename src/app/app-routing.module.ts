@@ -9,6 +9,7 @@ import { LoginLayoutComponent } from './layouts/login-layout/login-layout.compon
 import { AvisComponent } from './avis/avis.component';
 import { PrixComponent } from './prix/prix.component';
 import { DriverComponent } from './driver/driver.component';
+import { PassagerComponent } from './passager/passager.component';
 
 
 
@@ -31,6 +32,9 @@ const routes: Routes = [
       },
       {
         path: 'drivers', component: DriverComponent
+      },
+      {
+        path: 'passagers', component: PassagerComponent
       },
       {
         path: 'avis', component: AvisComponent

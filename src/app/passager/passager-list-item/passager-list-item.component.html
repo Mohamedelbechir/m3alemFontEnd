@@ -1,0 +1,13 @@
+<td>{{ passager.cin}}</td>
+<td>{{ passager.nom}}</td>
+<td>{{ passager.prenom}}</td>
+<td>{{ passager.tel}}</td>
+<td>{{ depuis(passager.dateDemande)}}</td>
+
+<td><a (click)="onRequestHist.emit(passager.cin)" class="text-primary pointer"><u>historiques des
+            courses</u></a></td>
+<!-- <td class="text-center">
+
+    <span class="btn btn-success" title="activer ce chauffeur" (click)="onDeleteRequest.emit(passager.cin)"><i
+            class="fa fa-check"></i></span>
+</td> -->

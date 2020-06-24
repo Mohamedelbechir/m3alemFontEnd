@@ -1,30 +1,7 @@
-<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#modalOperationDriver">Open Modal</button>
-<div id="modalOperationDriver" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title"
-    aria-hidden="true">
-    <div class="modal-dialog modal_add_election" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="my-modal-title">{{currentModalTitle}}</h5>
-                <button class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    {{currentModalMessage}}
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button id="closeModalPart" type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                <button (click)="onConfirme()" class="btn btn-dark float-right">oui</button>
-            </div>
-        </div>
 
-    </div>
-</div>
 
-<button id="openModalHist" [hidden]="true" data-toggle="modal" data-target="#modalHist">Open Modal</button>
-<div id="modalHist" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+<button id="openModalHistPassager" [hidden]="true" data-toggle="modal" data-target="#modalHistPassager">Open Modal</button>
+<div id="modalHistPassager" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -34,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table datatable [dtOptions]='dtOptionsDriver' [dtTrigger]="dtTriggerDriver"
+                <table datatable [dtOptions]='dtOptionsPassager' [dtTrigger]="dtTriggerPassager"
                     class='row-border hover table table-striped'>
                     <thead>
                         <tr>
@@ -62,14 +39,15 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button id="closeModalPart" type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button id="closeModalHistPassager" type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
             </div>
         </div>
 
     </div>
 </div>
+
 <div class="container mt-100 ">
-    <table datatable [dtOptions]='dtOptionsDriver' [dtTrigger]="dtTriggerDriver"
+    <table datatable [dtOptions]='dtOptionsPassager' [dtTrigger]="dtTriggerPassager"
         class='row-border hover table table-striped'>
         <thead>
             <tr>
@@ -77,19 +55,17 @@
                 <th class="text-center">Nom</th>
                 <th class="text-center">Prénom</th>
                 <th class="text-center">Téléphone</th>
-                <th class="text-center">Date demande</th>
-                <th class="text-center">Age</th>
-                <th class="text-center">courses</th>
-                <th class="text-center">Actions</th>
+                <th class="text-center">Date d'insption</th>
+                <th class="text-center">Courses</th>
 
             </tr>
         </thead>
         <tbody>
+            <tr class="text-center" app-passager-list-item   *ngFor="let p of passagers;" [id]="p.cin" [passager]="p"
+            (onDeleteRequest)="onDeleteRequest($event)" (onRequestHist)="onRequestHist($event)">
 
-            <tr app-driver-list-item *ngFor="let driver of drivers;" [id]="driver.cin" [driver]="driver"
-                (onOperationRequest)="onOperationRequest($event)" (onRequestHist)="onRequestHist($event)">
-
-            </tr>
+        </tr>
+           
         </tbody>
     </table>
 </div>
